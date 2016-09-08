@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Teste Valemobi</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" href="testeValemobi.css"/>
+		<script src="jquery-3.1.0.min.js" type="text/javascript"></script>
+		<script src="jquery.maskedinput.js" type="text/javascript"></script>
+		<script src="jquery.maskMoney.js" type="text/javascript"></script>
+		<script language="JavaScript">
+	
+			$(document).ready(function(){
+				
+				$("#CodMercadoria").keypress(function(e){
+					if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)){
+						return false;
+					}
+				});
+				
+				$("#Quantidade").keypress(function(e){
+					if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)){
+						return false;
+					}
+				});
+				
+				$("#Preco").maskMoney();
+			
+			});
+	
+			function enviardados(){
+						
+				if(document.Negociacao.CodMercadoria.value==""){
+					alert("O campo Código da Mercadoria está vazio!");
+					document.Negociacao.CodMercadoria.focus();
+					return false;
+				} 
+ 
+				if(document.Negociacao.TipoMercadoria.value==""){
+					alert("O campo Tipo de Mercadoria está vazio!");
+					document.Negociacao.TipoMercadoria.focus();
+					return false;
+				}
+ 
+				if(document.Negociacao.NomeMercadoria.value==""){
+					alert("O campo Nome da Mercadoria está vazio!");
+					document.Negociacao.NomeMercadoria.focus();
+					return false;
+				}
+ 
+				if(document.Negociacao.Quantidade.value < 1){
+					alert("O campo Quantidade está vazio ou com valor menor que 1!");
+					document.Negociacao.Quantidade.focus();
+					return false;
+				}
+			
+				if(document.Negociacao.Preco.value==""){
+					alert("O campo preço está vazio!");
+					document.Negociacao.Preco.focus();
+					return false;
+				}
+			
+				if(document.Negociacao.TipoNegocio.value==""){
+					alert("Selecione um Tipo de Negócio!");
+					document.Negociacao.TipoNegocio.focus();
+					return false;
+				}
+			
+				return true;
+				
+			}		
+ 
+		</script>	
+	</head>
+	<body>
+		<div id="Principal">
+			<form name="Negociacao" action="incluidb.php" method="post" enctype="multipart/form-data">
+				<fieldset id="FormNegociacao">
+					<legend class="titulo">Negociação de Mercadorias</legend>
+					<label class="negmerc">Código da Mercadoria:</label><input type="text" name="CodMercadoria" id="CodMercadoria"/><br><br>
+					<label class="negmerc">Tipo de Mercadoria:</label><input type="text" name ="TipoMercadoria" id="TipoMercadoria"/><br><br>
+					<label class="negmerc">Nome da Mercadoria:</label><input type="text" name="NomeMercadoria" id="NomeMercadoria"/><br><br>
+					<label class="negmerc">Quantidade:</label><input type="text" name="Quantidade" id="Quantidade"/><br><br>
+					<label class="negmerc">Preço:</label><input type="text" name="Preco" id="Preco"/><br><br>
+					<label class="negmerc">Tipo do Negócio:</label><select name="TipoNegocio" id="TipoNegocio">
+						<option value=""></option>
+						<option value="Compra">Compra</option>
+						<option value="Venda">Venda</option>
+					</select><br><br>
+					<input type="submit" name="Confirmar" id="Confirmar" class="button" onclick="return enviardados()" value="Confirmar"/>&nbsp;
+					<a href="listaoperacoes.php"><input type="button" name="ListaOperacoes" id="ListaOperacoes" class="button" value="Mostrar Lista de Operações"/></a>
+				</fieldset>
+			</form>
+		</div>
+	</body>
+</html>
